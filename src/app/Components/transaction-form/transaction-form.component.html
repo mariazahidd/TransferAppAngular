@@ -1,0 +1,45 @@
+<div class="container" novalidate>
+    <form [formGroup]="formGroup" (ngSubmit)="onFormSubmit(formGroup.value)" class="form">
+
+        <mat-form-field class="form-element" *ngIf="transaction && transaction.ID">
+            <input matInput placeholder="ID" formControlName="ID">
+        </mat-form-field>
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Account Holder" formControlName="AccountHolder">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <input matInput placeholder="IBAN" formControlName="IBAN">
+            <mat-error *ngIf="!formGroup.controls['IBAN'].valid && formGroup.controls['IBAN'].touched">
+                {{ getIBANError() }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Amount" formControlName="Amount">
+            <mat-error *ngIf="!formGroup.controls['Amount'].valid && formGroup.controls['Amount'].touched">
+                {{ getAmountError() }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-element">
+            <input matInput placeholder="Date" [min]="minDate" [matDatepicker]="picker" formControlName="Date"
+                (dateChange)="dateChangeHandler('change', $event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="!formGroup.controls['Date'].valid && formGroup.controls['Date'].touched">
+                {{ getDateError() }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+            <textarea matInput placeholder="Note" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"
+                formControlName="Note"></textarea>
+        </mat-form-field>
+
+        <div class="form-element">
+            <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Submit
+                Form</button>
+        </div>
+
+    </form>
+</div>
