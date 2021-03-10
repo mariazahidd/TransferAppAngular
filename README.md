@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## NodeJS server
 
 switch to server folder
-Run `npm install`
-Run `npm start`
+run `npm install`
+then run `npm start`
 
 ## Angular Client
 
